@@ -12,11 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Trading Utils',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
       home: const HomePage(),
+      theme: ThemeData(
+        fontFamily: 'Poppins',
+      ),
     );
   }
 }
@@ -28,17 +27,28 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.deepPurple[300],
+        elevation: 0,
         centerTitle: true,
         title: const Text(
           'Trading Tools',
           style: TextStyle(color: Colors.white),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person, color: Colors.white),
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _buildCard(context, 'Calculator', Icons.leaderboard,
                 const CalculatorPage()),
@@ -60,7 +70,10 @@ class HomePage extends StatelessWidget {
         MaterialPageRoute(builder: (context) => page),
       ),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+          side: const BorderSide(color: Colors.deepPurple, width: 2),
+        ),
         elevation: 1,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
