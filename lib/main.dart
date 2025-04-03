@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Trading Tools',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         leading: IconButton(
           icon: const Icon(Icons.menu, color: Colors.white),
@@ -50,8 +50,8 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            _buildCard(context, 'Calculator', Icons.leaderboard,
-                const CalculatorPage()),
+            _buildCard(
+                context, 'Levels', Icons.leaderboard, const CalculatorPage()),
             _buildCard(
                 context, 'History', Icons.history, const CalculatorPage()),
             _buildCard(
