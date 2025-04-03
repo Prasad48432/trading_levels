@@ -10,26 +10,85 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Trading Levels',
+      title: 'Trading Utils',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Trading Levels'),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: const Text(
+          'Trading Tools',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildCard(context, 'Calculator', Icons.leaderboard,
+                const CalculatorPage()),
+            _buildCard(
+                context, 'History', Icons.history, const CalculatorPage()),
+            _buildCard(
+                context, 'Settings', Icons.settings, const CalculatorPage()),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCard(
+      BuildContext context, String title, IconData icon, Widget page) {
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => page),
+      ),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 1,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(icon, size: 100, color: Colors.deepPurple),
+              const SizedBox(width: 10),
+              Text(
+                title,
+                style:
+                    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class CalculatorPage extends StatefulWidget {
+  const CalculatorPage({super.key});
+
+  @override
+  State<CalculatorPage> createState() => _CalculatorPageState();
+}
+
+class _CalculatorPageState extends State<CalculatorPage> {
   final TextEditingController _controller = TextEditingController();
   double? _firstBoxValue;
   double? _secondBoxValue;
@@ -64,12 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        centerTitle: true,
-        title: Text(
-          widget.title,
-          style: const TextStyle(color: Colors.white),
-        ),
+        title: const Text('Trading Levels'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -77,17 +131,6 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15.0),
-                child: Image.asset(
-                  'assets/trading.jpg',
-                  height: 200,
-                  width: double.infinity, // Ensure proper aspect ratio
-                  fit: BoxFit
-                      .cover, // Crop and fit image inside the rounded container
-                ),
-              ),
-              const SizedBox(height: 20),
               TextField(
                 controller: _controller,
                 keyboardType: TextInputType.number,
@@ -100,8 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 20),
               _buildBox('1% Added', _firstBoxValue),
               _buildBox('0.18% Added', _secondBoxValue),
-              _buildBox('Original', _thirdBoxValue),
-              _buildBox('Original', _fourthBoxValue),
+              _buildBox('0.28% Added', _thirdBoxValue),
+              _buildBox('0.38% Added', _fourthBoxValue),
             ],
           ),
         ),
