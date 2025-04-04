@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:trading_levels/caluculator_page.dart';
+import 'package:trading_levels/history_page.dart';
+import 'package:trading_levels/settings_page.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+List<String> calculationHistory = [
+  "5 + 3 = 8",
+  "12 × 4 = 48",
+  "15 - 7 = 8",
+  "9 ÷ 3 = 3",
+  "20 + 25 = 45",
+  "50 ÷ 2 = 25",
+  "100 - 35 = 65",
+  "8 × 7 = 56",
+];
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -53,9 +66,14 @@ class HomePage extends StatelessWidget {
             _buildCard(
                 context, 'Levels', Icons.leaderboard, const CalculatorPage()),
             _buildCard(
-                context, 'History', Icons.history, const CalculatorPage()),
+                context,
+                'History',
+                Icons.history,
+                HistoryPage(
+                  calculationHistory: calculationHistory,
+                )),
             _buildCard(
-                context, 'Settings', Icons.settings, const CalculatorPage()),
+                context, 'Settings', Icons.settings, const SettingsPage()),
           ],
         ),
       ),
